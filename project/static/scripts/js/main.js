@@ -34,6 +34,29 @@ var Nav = React.createClass({displayName: "Nav",
 });
 
 
+
+// class PageContainer extends Component {
+//   render() {
+//     return (
+//       <div className="page-container">
+//         {this.props.children}
+//       </div>
+//     );
+//   }
+// }
+
+
+
+var PageContainer = React.createClass({displayName: "PageContainer",
+  render() {
+    return (
+      React.createElement("div", {className: "page-container"}, 
+        this.props.children
+      )
+    );
+  }
+});
+
 var DynamicSearch = React.createClass({displayName: "DynamicSearch",
 
   // sets initial state
@@ -61,7 +84,7 @@ var DynamicSearch = React.createClass({displayName: "DynamicSearch",
     }
 
     return (
-      React.createElement("div", null, 
+      React.createElement("div", {className: "search-component"}, 
         React.createElement("input", {type: "text", value: this.state.searchString, onChange: this.handleChange, placeholder: "Search!"}), 
         React.createElement("ul", null, 
            countries.map(function(country){ return React.createElement("li", null, country.name, " ") }) 
@@ -84,17 +107,38 @@ var countries = [
 ];
 
 
-let appContainer = (
+let MainContent = (
   React.createElement("div", null, 
     React.createElement(Nav, null), 
-    React.createElement(DynamicSearch, {items:  countries })
+    React.createElement(PageContainer, null, 
+      React.createElement(DynamicSearch, {items:  countries })
+    )
   )
-  );
-
+);
 
 ReactDOM.render(
-  appContainer, 
+  MainContent , 
   document.getElementById("app-container")
 );
+
+// var MainContent = React.createClass({
+//     render: function(){
+//         return (
+//             <div className="main-content">
+//               <Nav />
+//               <PageContainer>
+//                 <DynamicSearch items={ countries } />
+//               </PageContainer>
+//             </div>
+//         )
+//     }
+// });
+
+
+
+// ReactDOM.render(
+//   <MainContent />, 
+//   document.getElementById("app-container")
+// );
 
 },{}]},{},[1]);

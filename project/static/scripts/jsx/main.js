@@ -33,6 +33,29 @@ var Nav = React.createClass({
 });
 
 
+
+// class PageContainer extends Component {
+//   render() {
+//     return (
+//       <div className="page-container">
+//         {this.props.children}
+//       </div>
+//     );
+//   }
+// }
+
+
+
+var PageContainer = React.createClass({
+  render() {
+    return (
+      <div className="page-container">
+        {this.props.children}
+      </div>
+    );
+  }
+});
+
 var DynamicSearch = React.createClass({
 
   // sets initial state
@@ -60,7 +83,7 @@ var DynamicSearch = React.createClass({
     }
 
     return (
-      <div>
+      <div className="search-component">
         <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search!" />
         <ul>
           { countries.map(function(country){ return <li>{country.name} </li> }) }
@@ -83,15 +106,36 @@ var countries = [
 ];
 
 
-let appContainer = (
+let MainContent = (
   <div>
     <Nav />
-    <DynamicSearch items={ countries } />
+    <PageContainer>
+      <DynamicSearch items={ countries } />
+    </PageContainer>
   </div>
-  );
-
+);
 
 ReactDOM.render(
-  appContainer, 
+  MainContent , 
   document.getElementById("app-container")
 );
+
+// var MainContent = React.createClass({
+//     render: function(){
+//         return (
+//             <div className="main-content">
+//               <Nav />
+//               <PageContainer>
+//                 <DynamicSearch items={ countries } />
+//               </PageContainer>
+//             </div>
+//         )
+//     }
+// });
+
+
+
+// ReactDOM.render(
+//   <MainContent />, 
+//   document.getElementById("app-container")
+// );
