@@ -1,7 +1,16 @@
-var Nav = React.createClass({
-  render: function() {
-    return (
+var axios = require('axios');
+var react = require('react');
 
+
+class Nav extends react.Component {  
+
+  constructor(props){
+    super(props);
+    this.testGet();
+  };
+
+  render(){
+    return (
       <nav id="mainNav" className="navbar navbar-default navbar-fixed-top navbar-custom">
         <div className="container">
           <div className="navbar-header page-scroll">
@@ -29,8 +38,19 @@ var Nav = React.createClass({
         </div>
       </nav>
     );
+  };
+
+  testGet() {
+    axios.get('http://127.0.0.1:5000/api/images')
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
-});
+
+};
 
 
 
