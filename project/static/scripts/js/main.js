@@ -6044,6 +6044,18 @@ var countries = [
 ];
 
 
+
+var ImageGrid = React.createClass({displayName: "ImageGrid",
+  render: function() {
+    return (
+        React.createElement("div", {className: "row", id: "image_container"}
+        )
+    );
+  }
+});
+  
+
+
 let MainContent = (
   React.createElement("div", null, 
     React.createElement(Nav, null), 
