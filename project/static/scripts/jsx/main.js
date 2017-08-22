@@ -2,72 +2,10 @@ import axios from 'axios';
 import React, { Component }  from 'react';
 
 import Nav from './components/nav';
+import DynamicSearch from './components/dynamic_search';
+import PageContainer from './components/page_container';
 
 
-
-
-
-// class PageContainer extends Component {
-//   render() {
-//     return (
-//       <div className="page-container">
-//         {this.props.children}
-//       </div>
-//     );
-//   }
-// }
-
-
-
-var PageContainer = React.createClass({
-  render() {
-    return (
-      <div className="page-container">
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-var DynamicSearch = React.createClass({
-
-  // sets initial state
-  getInitialState: function(){
-    return { searchString: '' };
-  },
-
-  // sets state, triggers render method
-  handleChange: function(event){
-    // grab value form input box
-    this.setState({searchString:event.target.value});
-    console.log("scope updated!");
-  },
-
-  render: function() {
-
-    var countries = this.props.items;
-    var searchString = this.state.searchString.trim().toLowerCase();
-
-    // filter countries list by value from input box
-    if(searchString.length > 0){
-      countries = countries.filter(function(country){
-        return country.name.toLowerCase().match( searchString );
-      });
-    }
-
-    return (
-      <div className="search-component">
-        <input type="text" value={this.state.searchString} onChange={this.handleChange} placeholder="Search!" />
-        <ul>
-          { countries.map(function(country){ return <li>{country.name} </li> }) }
-        </ul>
-      </div>
-    )
-  }
-
-});
-
-// list of countries, defined with JavaScript object literals
 var countries = [
   {"name": "Sweden"}, {"name": "China"}, {"name": "Peru"}, {"name": "Czech Republic"},
   {"name": "Bolivia"}, {"name": "Latvia"}, {"name": "Samoa"}, {"name": "Armenia"},
@@ -78,19 +16,7 @@ var countries = [
   {"name": "Spain"}, {"name": "Poland"}, {"name": "Haiti"}
 ];
 
-
-
-var ImageGrid = React.createClass({
-  render: function() {
-    return (
-        <div className="row" id="image_container">
-        </div>
-    );
-  }
-});
   
-
-
 let MainContent = (
   <div>
     <Nav />
@@ -104,23 +30,3 @@ ReactDOM.render(
   MainContent , 
   document.getElementById("app-container")
 );
-
-// var MainContent = React.createClass({
-//     render: function(){
-//         return (
-//             <div className="main-content">
-//               <Nav />
-//               <PageContainer>
-//                 <DynamicSearch items={ countries } />
-//               </PageContainer>
-//             </div>
-//         )
-//     }
-// });
-
-
-
-// ReactDOM.render(
-//   <MainContent />, 
-//   document.getElementById("app-container")
-// );
